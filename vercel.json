@@ -1,0 +1,16 @@
+{
+    "rewrites": [
+        {
+            "source": "/((?!api|vs).*)",
+            "destination": "/static/$1"
+        },
+        {
+            "source": "/api/(.*)",
+            "destination": "/api"
+        },
+        {
+            "source": "/vs/(.*)",
+            "destination": "https://unpkg.com/monaco-editor@0.41.0/min/vs/$1"
+        }
+    ]
+}

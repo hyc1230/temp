@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!--MDUI-->
+        <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+        <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+        <!--Vditor-->
+        <link rel="stylesheet" href="https://unpkg.com/vditor@3.9.4/dist/index.css" />
+        <script src="https://unpkg.com/vditor@3.9.4/dist/index.min.js"></script>
+        <!--Monaco-->
+        <script src="./vs/loader.js"></script>
+        <script src="./vs/editor/editor.main.js"></script>
+        <link rel="stylesheet" href="./vs/editor/editor.main.css" />
+        <!--JQuery-->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <!--Custom js/css-->
+        <script src="./editor.js"></script>
+        <script src="./greeting.js"></script>
+    </head>
+    <body class="mdui-appbar-with-toolbar mdui-drawer-body-left mdui-theme-primary-indigo mdui-theme-accent-pink">
+        <!--顶栏-->
+        <div class="mdui-appbar mdui-appbar-fixed">
+            <div class="mdui-toolbar mdui-color-theme">
+                <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: '#drawer'}">
+                    <i class="mdui-icon material-icons">menu</i>
+                </button>
+                <a href="./" class="mdui-typo-headline">Hemo</a>
+                <div class="mdui-toolbar-spacer"></div>
+                <button class="mdui-btn mdui-btn-icon mdui-ripple">
+                    <i class="mdui-icon material-icons">collections_bookmark</i>
+                </button>
+                <button class="mdui-btn mdui-btn-icon mdui-ripple" mdui-menu="{target: '#user-menu'}">
+                    <i class="mdui-icon material-icons">account_circle</i>
+                </button>
+                <div class="mdui-menu" id="user-menu">
+                    <ul class="mdui-list">
+                        <li class="mdui-list-item mdui-ripple">
+                            <i class="mdui-list-item-icon mdui-icon material-icons">exit_to_app</i>
+                            <div class="mdui-list-item-content">登出</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--侧栏-->
+        <div class="mdui-drawer" id="drawer">
+            <ul class="mdui-list">
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">home</i>
+                    <a href="./" class="mdui-list-item-content">主页</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">library_books</i>
+                    <a href="./post.html" class="mdui-list-item-content">文章管理</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">message</i>
+                    <a href="./shuoshuo.html" class="mdui-list-item-content">说说管理</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">settings</i>
+                    <a href="./config.html" class="mdui-list-item-content">配置管理</a>
+                </li>
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons">folder</i>
+                    <a href="./explorer.html" class="mdui-list-item-content">文件管理</a>
+                </li>
+            </ul>
+        </div>
+        <!--主内容-->
+        <div class="mdui-container mdui-m-b-2">
+            <div class="mdui-col-sm-12 mdui-col-md-6 mdui-col-lg-6 mdui-col-xl-6">
+                <div class="mdui-card mdui-shadow-15 mdui-m-t-2">
+                    <div class="mdui-card-content">
+                        <h2><span id="greeting"><div class="mdui-spinner mdui-spinner-colorful"></div></span>，今天要写些什么呢？</h2>
+                        <p>来篇新的...</p>
+                        <blockquote>
+                            <button class="mdui-btn mdui-ripple">文章！</button>
+                            <button class="mdui-btn mdui-ripple">草稿！</button>
+                            <button class="mdui-btn mdui-ripple">页面！</button>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="mdui-card mdui-shadow-15 mdui-m-t-2">
+                    <div class="mdui-card-content">
+                        <h2>今天有什么事要和大家分享？</h2>
+                        <div id="shuoshuo-editor">
+                            <!--加载Vditor-->
+                            <center><div class="mdui-spinner mdui-spinner-colorful"></div></center>
+                        </div>
+                        <button class="mdui-btn mdui-ripple mdui-m-t-2 mdui-m-b-2 mdui-float-right">发射说说！</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mdui-col-sm-12 mdui-col-md-6 mdui-col-lg-6 mdui-col-xl-6">
+                <div class="mdui-card mdui-shadow-15 mdui-m-t-2">
+                    <div class="mdui-card-content">
+                        <h2>有什么灵感？赶紧记录下来！</h2>
+                        <div class="mdui-textfield mdui-textfield-floating-label" style="margin-top: -36px !important;">
+                            <label class="mdui-textfield-label">文件名</label>
+                            <input type="text" class="mdui-textfield-input" id="draft-filename">
+                        </div>
+                        <div id="draft-editor">
+                            <!--加载Vditor-->
+                            <center><div class="mdui-spinner mdui-spinner-colorful"></div></center>
+                        </div>
+                        <button class="mdui-btn mdui-ripple mdui-m-t-2 mdui-m-b-2 mdui-float-right">发射草稿！</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>editor.newVditor("shuoshuo-editor", "22.5em", "");</script>
+        <script>editor.newVditor("draft-editor", "33em", "");</script>
+        <script>greeting.load("greeting");</script>
+    </body>
+</html>
